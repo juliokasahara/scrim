@@ -26,7 +26,7 @@
                                 Grupo(s)
                             </th>
                             <th scope="col">
-                                Ação
+                                convite
                             </th>
                           </tr>
                         </thead>
@@ -37,10 +37,15 @@
                                 {{ $group->name }}
                             </th>
                             <th scope="row">
+                                @if ($group->user_owner_id == $user->id) 
+                                    {{ $group->hash }}
+                                @endif
+                            </th>
+                            <th scope="row">
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-outline-success">Time</button>
-                                    <a type="button" class="btn btn-outline-warning" href="{{ route('grupo.editar',$group->id) }}" >Editar</a>
                                     @if ($group->user_owner_id == $user->id)                                 
+                                    <a type="button" class="btn btn-outline-warning" href="{{ route('grupo.editar',$group->id) }}" >Editar</a>
                                         <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
                                     @endif
                                 </div>

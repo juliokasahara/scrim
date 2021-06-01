@@ -44,6 +44,12 @@
                             @endif
                         @else
 
+                            <form action="{{ route('usuario.convite') }}" method="post">
+                                <input type="text" name="hash">
+                                <button class="btn btn-success">Adicionar time</button>
+                            </form>
+
+                            
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

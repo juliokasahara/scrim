@@ -38,6 +38,7 @@ class GroupController extends Controller
 
         $input = $request->all();
         $input['user_owner_id'] = $request->user()->id;
+        $input['hash'] = md5($request->user()->id.$request->name);
 
         $group = \App\Models\Group::create($input);
 
@@ -101,9 +102,8 @@ class GroupController extends Controller
         return redirect()->action([GroupController::class, 'index']);
     }
 
-    public function detail($id)
-    {
-        
+    public function addTeam(Request $request){
+        dd($request);
     }
 
 }

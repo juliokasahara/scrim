@@ -26,6 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/usuario', [UserController::class,'index'])->name('usuario');
+Route::post('/usuario/convite', [GroupController::class,'addTeam'])->name('usuario.convite');
 
 Route::get('/grupo', [GroupController::class,'index'])->name('grupo');
 Route::get('/grupo/adicionar', [GroupController::class,'add'])->name('group.add');

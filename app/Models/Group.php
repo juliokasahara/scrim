@@ -11,7 +11,7 @@ class Group extends Model
 
     protected $table = 'groups';
 
-    protected $fillable = ['id','name','user_owner_id'];
+    protected $fillable = ['id','name','user_owner_id','hash'];
 
     public function users(){
         // info;app;tabela,idPK;idFK
