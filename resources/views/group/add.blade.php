@@ -6,7 +6,7 @@
             <div class="card">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('usuario') }}">Usuário</a></li>
+                        <li class="breadcrumb-item"><a href="{{ route('grupo') }}">Grupo</a></li>
                         <li class="breadcrumb-item active">Adicionar</li>
                     </ol>
                 </nav>

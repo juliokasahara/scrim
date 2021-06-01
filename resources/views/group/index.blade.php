@@ -8,7 +8,7 @@
             <div class="card">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Lista de Grupo(s))</li>
+                        <li class="breadcrumb-item active">Lista de Grupo(s)</li>
                     </ol>
                 </nav>
 
@@ -40,8 +40,9 @@
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-outline-success">Time</button>
                                     <a type="button" class="btn btn-outline-warning" href="{{ route('grupo.editar',$group->id) }}" >Editar</a>
-                                    <a type="button" class="btn btn-outline-danger" 
-                                    onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
+                                    @if ($group->user_owner_id == $user->id)                                 
+                                        <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
+                                    @endif
                                 </div>
                             </th>
                           </tr>

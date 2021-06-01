@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Constants;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,15 +19,19 @@ class User extends Authenticatable
 
     public function groups(){
         // info;app;tabela,idPK;idFK
-        return $this->belongsToMany('App\Group','group_users','id_group','id_user');
+        return $this->belongsToMany(Group::class,'group_users','id_group','id_user');
     }
 
     public function addGroup(Group $group){
         return $this->groups()->save($this);
     }
 
-    
+    public function paginate($user_id){
+        return $this->belongsToMany(Group::class,'group_user','id_user','id_group')->where('id_user', '=', $user_id)->paginate(2);
+    }
 
+    protected $table = 'users';
+    
     /**
      * The attributes that are mass assignable.
      *

@@ -13,13 +13,14 @@ class CreateGroupsUsers extends Migration
      */
     public function up()
     {
-        Schema::create('group_users', function (Blueprint $table) {
+        Schema::create('group_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_user')->unsigned();
+            $table->foreign('id_user')->references('id')->on('users');
             $table->unsignedBigInteger('id_group')->unsigned();
+            $table->foreign('id_group')->references('id')->on('groups');
+            $table->timestamps();
 
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('id_group')->references('id')->on('groups')->onDelete('cascade');
         });
 
     }

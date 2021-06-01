@@ -9,11 +9,13 @@ class Group extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['id','name'];
+    protected $table = 'groups';
+
+    protected $fillable = ['id','name','user_owner_id'];
 
     public function users(){
         // info;app;tabela,idPK;idFK
-        return $this->belongsToMany('App\User','group_users','id_user','id_group');
+        return $this->belongsToMany(User::class,'group_users','id_user','id_group');
     }
 
 }

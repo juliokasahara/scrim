@@ -33,7 +33,8 @@ Route::post('/grupo/salvar', [GroupController::class,'save'])->name('grupo.salva
 Route::get('/grupo/editar/{id}', [GroupController::class,'edit'])->name('grupo.editar');
 Route::put('/grupo/atualizar/{id}', [GroupController::class,'update'])->name('grupo.atualizar');
 Route::get('/grupo/deletar/{id}', [GroupController::class,'delete'])->name('grupo.deletar');
-Route::get('/grupo/detalhe/{id}', [GroupController::class,'detail'])->name('grupo.detalhe');
+
+//Route::get('/grupo/detalhe/{id}', [GroupController::class,'detail'])->name('grupo.detalhe');
 
 
 

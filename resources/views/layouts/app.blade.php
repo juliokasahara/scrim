@@ -26,14 +26,14 @@
         
     @include('layouts._includes._nav')
 
-    @if (Session::has('status'))
-        <br>
-        <div class="col-md-12 col-md-offset-1">
-            <div class="alert alert-success" role="alert">
-                {{ session('status') }}
+        @if (Session::has('status'))
+            <br>
+            <div class="col-md-12 col-md-offset-1">
+                <div class="alert alert-success" role="alert">
+                    {{ session('status') }}
+                </div>
             </div>
-        </div>
-    @endif
+        @endif
 
         <main class="py-4">
             @yield('content')
