@@ -27,7 +27,7 @@ class User extends Authenticatable
     }
 
     public function paginate($user_id){
-        return $this->belongsToMany(Group::class,'group_user','id_user','id_group')->where('id_user', '=', $user_id)->paginate(2);
+        return $this->belongsToMany(Group::class,'group_user','id_user','id_group')->where('id_user', '=', $user_id)->paginate(10);
     }
 
     protected $table = 'users';

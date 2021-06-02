@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,7 +27,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/usuario', [UserController::class,'index'])->name('usuario');
-Route::post('/usuario/convite', [GroupController::class,'addTeam'])->name('usuario.convite');
+Route::post('/usuario/convite', [UserController::class,'addTeam'])->name('usuario.convite');
 
 Route::get('/grupo', [GroupController::class,'index'])->name('grupo');
 Route::get('/grupo/adicionar', [GroupController::class,'add'])->name('group.add');
@@ -35,7 +36,8 @@ Route::get('/grupo/editar/{id}', [GroupController::class,'edit'])->name('grupo.e
 Route::put('/grupo/atualizar/{id}', [GroupController::class,'update'])->name('grupo.atualizar');
 Route::get('/grupo/deletar/{id}', [GroupController::class,'delete'])->name('grupo.deletar');
 
-//Route::get('/grupo/detalhe/{id}', [GroupController::class,'detail'])->name('grupo.detalhe');
+Route::get('/time/{id}', [TimeController::class,'index'])->name('time');
+Route::get('/time/deletar/{id}/{idGrupo}', [TimeController::class,'delete'])->name('time.deletar');
 
 
 

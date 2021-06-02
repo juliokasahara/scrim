@@ -44,9 +44,10 @@
                             @endif
                         @else
 
-                            <form action="{{ route('usuario.convite') }}" method="post">
-                                <input type="text" name="hash">
-                                <button class="btn btn-success">Adicionar time</button>
+                            <form action="{{ route('usuario.convite') }}" method="POST" action="/register">
+                                @csrf
+                                <input type="text" name="hash" class="form" placeholder="Adicionar grupo">
+                                <button class="btn btn-success">+ Grupo</button>
                             </form>
 
                             

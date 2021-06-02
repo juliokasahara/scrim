@@ -102,8 +102,4 @@ class GroupController extends Controller
         return redirect()->action([GroupController::class, 'index']);
     }
 
-    public function addTeam(Request $request){
-        dd($request);
-    }
-
 }

@@ -13,9 +13,8 @@
 
                 <div class="card-body">
 
-                    <form action="{{ route('grupo.atualizar', $group->id) }}" method="post">
+                    <form action="{{ route('grupo.atualizar', $group->id) }}" method="POST">
                         {{ csrf_field() }}
-                        <input type="hidden" name="_method" value="put">
                         <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" name="name" class="form-control" placeholder="Nome do grupo" value="{{ $group->name }}"/>
