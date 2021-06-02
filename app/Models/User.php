@@ -26,7 +26,7 @@ class User extends Authenticatable
         return $this->groups()->save($this);
     }
 
-    public function paginate($user_id){
+    public function paginateCustom($user_id){
         return $this->belongsToMany(Group::class,'group_user','id_user','id_group')->where('id_user', '=', $user_id)->paginate(10);
     }
 

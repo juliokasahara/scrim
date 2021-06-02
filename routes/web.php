@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GroupController;
+use App\Http\Controllers\ScrimController;
 use App\Http\Controllers\TimeController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -38,6 +39,8 @@ Route::get('/grupo/deletar/{id}', [GroupController::class,'delete'])->name('grup
 
 Route::get('/time/{id}', [TimeController::class,'index'])->name('time');
 Route::get('/time/deletar/{id}/{idGrupo}', [TimeController::class,'delete'])->name('time.deletar');
+
+Route::get('/scrim', [ScrimController::class,'index'])->name('scrim');
 
 
 

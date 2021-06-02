@@ -18,4 +18,11 @@ class Group extends Model
         return $this->belongsToMany(User::class,'group_users','id_user','id_group');
     }
 
+    public function scrim(){
+        // info;app;tabela,idPK;idFK
+        return $this->belongsToMany(Scrim::class,'group_scrims','id_scrim','id_group');
+    }
+
+
+
 }

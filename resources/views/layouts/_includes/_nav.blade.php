@@ -24,6 +24,10 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('grupo') }}">{{ __('Grupo') }}</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('scrim') }}">{{ __('Scrim') }}</a>
+                            </li>
                         </ul>
                     @endif
 

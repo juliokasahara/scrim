@@ -23,7 +23,7 @@ class GroupController extends Controller
 
         $user = $request->user();
 
-        $groups = $user->paginate($user->id);
+        $groups = $user->paginateCustom($user->id);
 
         return view('group.index',compact('groups'),compact('user'));
 
