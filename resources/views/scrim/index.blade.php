@@ -74,7 +74,8 @@
                                                                         <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
                                                                     @endif
                                                                 </div> --}}
-                                <a type="button" class="btn btn-outline-success" href="#">Cadastrar</a>
+                                <a type="button" class="btn btn-outline-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
+                                
                             </th>
                           </tr>
                           @endforeach

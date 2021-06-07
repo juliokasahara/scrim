@@ -5,9 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Group;
-use App\Models\User;
+use App\Models\Scrim;
 
 class GroupController extends Controller
 {
@@ -25,9 +26,9 @@ class GroupController extends Controller
 
         $user = $request->user();
         $group = new Group;
-        $groups = $user->groups()->where('user_id', '=', $user->id)->paginate(3);
+        $groups = $user->groups()->where('user_id', '=', $user->id)->paginate(Config::get('constantes.paginacao.padrao'));
 
-        return view('group.index',compact('groups'),compact('user'));
+        return view('group.index',compact('groups','user'));
 
     }
 
@@ -102,6 +103,18 @@ class GroupController extends Controller
         Session::flash('status', 'Grupo deletado com sucesso!'); 
 
         return redirect()->action([GroupController::class, 'index']);
+    }
+
+    
+    public function addScrim($id,Request $request)
+    {
+        $scrim = Scrim::find($id);
+
+        $user = $request->user();
+
+        $groups = $user->groups()->where('user_id', '=', $user->id)->get();
+
+        return view('group.add_scrim',compact('scrim','groups'));
     }
 
 }

@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Config;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScrimController extends Controller
 {
@@ -16,7 +18,7 @@ class ScrimController extends Controller
     public function index(Request $request)
     {
 
-        $scrims = DB::table('scrims')->paginate(10);
+        $scrims = DB::table('scrims')->paginate(Config::get('constantes.paginacao.padrao'));
 
         return view('scrim.index',compact('scrims'));
 

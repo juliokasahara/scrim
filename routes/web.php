@@ -36,6 +36,7 @@ Route::post('/grupo/salvar', [GroupController::class,'save'])->name('grupo.salva
 Route::get('/grupo/editar/{id}', [GroupController::class,'edit'])->name('grupo.editar');
 Route::put('/grupo/atualizar/{id}', [GroupController::class,'update'])->name('grupo.atualizar');
 Route::get('/grupo/deletar/{id}', [GroupController::class,'delete'])->name('grupo.deletar');
+Route::get('/grupo/scrim/inscrincao/{id}', [GroupController::class,'addScrim'])->name('scrim.inscricao');
 
 Route::get('/time/{id}', [TimeController::class,'index'])->name('time');
 Route::get('/time/deletar/{id}/{idGrupo}', [TimeController::class,'delete'])->name('time.deletar');
