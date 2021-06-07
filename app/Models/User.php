@@ -19,15 +19,12 @@ class User extends Authenticatable
 
     public function groups(){
         // info;app;tabela,idPK;idFK
-        return $this->belongsToMany(Group::class,'group_users','id_group','id_user');
+        // return $this->belongsToMany(Group::class,'group_users','group_id','user_id');
+        return $this->belongsToMany(Group::class,'group_users');
     }
 
     public function addGroup(Group $group){
         return $this->groups()->save($this);
-    }
-
-    public function paginateCustom($user_id){
-        return $this->belongsToMany(Group::class,'group_user','id_user','id_group')->where('id_user', '=', $user_id)->paginate(10);
     }
 
     protected $table = 'users';

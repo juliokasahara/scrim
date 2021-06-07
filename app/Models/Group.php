@@ -15,12 +15,13 @@ class Group extends Model
 
     public function users(){
         // info;app;tabela,idPK;idFK
-        return $this->belongsToMany(User::class,'group_users','id_user','id_group');
+        //return $this->belongsToMany(User::class,'group_users','user_id','group_id');
+        return $this->belongsToMany(User::class,'group_users','user_id','group_id');
     }
 
     public function scrim(){
         // info;app;tabela,idPK;idFK
-        return $this->belongsToMany(Scrim::class,'group_scrims','id_scrim','id_group');
+        return $this->belongsToMany(Scrim::class,'group_scrims','scrim_id','group_id');
     }
 
 

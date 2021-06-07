@@ -12,10 +12,10 @@ class TimeController extends Controller
 
 
         $users = DB::table('users')
-        ->select('users.name','groups.user_owner_id','group_user.id_user','group_user.id_group')
-        ->join('group_user', 'users.id', '=', 'group_user.id_user')
-        ->join('groups', 'groups.id', '=', 'group_user.id_group')
-        ->where('group_user.id_group','=',$request->id)
+        ->select('users.name','groups.user_owner_id','group_users.user_id','group_users.group_id')
+        ->join('group_users', 'users.id', '=', 'group_users.user_id')
+        ->join('groups', 'groups.id', '=', 'group_users.group_id')
+        ->where('group_users.group_id','=',$request->id)
         ->get();
 
         /* dd($users); */
@@ -26,9 +26,9 @@ class TimeController extends Controller
     public function delete($id,$idGrupo)
     {
 
-        DB::table('group_user')
-        ->where('id_user', $id)
-        ->where('id_group', $idGrupo)
+        DB::table('group_users')
+        ->where('user_id', $id)
+        ->where('group_id', $idGrupo)
         ->delete();
 
         Session::flash('status', 'Usuário deletado com sucesso!');  

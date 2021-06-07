@@ -13,12 +13,12 @@ class CreateGroupsScrimsTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_scrim', function (Blueprint $table) {
+        Schema::create('group_scrims', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_scrim')->unsigned();
-            $table->foreign('id_scrim')->references('id')->on('scrims');
-            $table->unsignedBigInteger('id_group')->unsigned();
-            $table->foreign('id_group')->references('id')->on('groups');
+            $table->unsignedBigInteger('scrim_id')->unsigned();
+            $table->foreign('scrim_id')->references('id')->on('scrims');
+            $table->unsignedBigInteger('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateGroupsScrimsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_scrim');
+        Schema::dropIfExists('group_scrims');
     }
 }

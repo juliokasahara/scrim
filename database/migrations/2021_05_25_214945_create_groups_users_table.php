@@ -13,12 +13,12 @@ class CreateGroupsUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('group_user', function (Blueprint $table) {
+        Schema::create('group_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_user')->unsigned();
-            $table->foreign('id_user')->references('id')->on('users');
-            $table->unsignedBigInteger('id_group')->unsigned();
-            $table->foreign('id_group')->references('id')->on('groups');
+            $table->unsignedBigInteger('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('group_id')->unsigned();
+            $table->foreign('group_id')->references('id')->on('groups');
             $table->timestamps();
 
         });
@@ -32,6 +32,6 @@ class CreateGroupsUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('group_user');
+        Schema::dropIfExists('group_users');
     }
 }

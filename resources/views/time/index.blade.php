@@ -32,14 +32,14 @@
                           <tr>
                             <th scope="row">
                                 {{ $user->name }}
-                                @if ($user->id_user == $user->user_owner_id)  
+                                @if ($user->user_id == $user->user_owner_id)  
                                     (Admin)
                                 @endif
                             </th>
 
                             <th scope="row">
-                                @if($user->id_user != $user->user_owner_id)  
-                                    <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Usuário esse registro?') ? window.location.href='{{ route('time.deletar',[$user->id_user,$user->id_group]) }}' : false)">Excluir</a>
+                                @if($user->user_id != $user->user_owner_id)  
+                                    <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Usuário esse registro?') ? window.location.href='{{ route('time.deletar',[$user->user_id,$user->group_id]) }}' : false)">Excluir</a>
                                 @endif
                             </th>
                           </tr>

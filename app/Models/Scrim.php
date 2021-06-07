@@ -15,7 +15,7 @@ class Group extends Model
 
     public function groups(){
         // info;app;tabela,idPK;idFK
-        return $this->belongsToMany(Group::class,'group_scrims','id_group','id_user');
+        return $this->belongsToMany(Group::class,'group_scrims','group_id','user_id');
     }
 
 }

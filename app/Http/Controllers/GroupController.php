@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Group;
+use App\Models\User;
 
 class GroupController extends Controller
 {
@@ -22,8 +24,8 @@ class GroupController extends Controller
     public function index(Request $request){
 
         $user = $request->user();
-
-        $groups = $user->paginateCustom($user->id);
+        $group = new Group;
+        $groups = $user->groups()->where('user_id', '=', $user->id)->paginate(3);
 
         return view('group.index',compact('groups'),compact('user'));
 
@@ -42,9 +44,9 @@ class GroupController extends Controller
 
         $group = \App\Models\Group::create($input);
 
-        DB::table('group_user')->insert([
-            'id_user' => $request->user()->id,
-            'id_group' => $group->id
+        DB::table('group_users')->insert([
+            'user_id' => $request->user()->id,
+            'group_id' => $group->id
         ]);
 
         Session::flash('status', 'Salvo com sucesso!'); 
@@ -92,7 +94,7 @@ class GroupController extends Controller
 
     public function delete($id)
     {
-        DB::table('group_user')->where('id_group', $id)->delete();
+        DB::table('group_users')->where('group_id', $id)->delete();
 
         $group = \App\Models\Group::find($id);
         $group->delete();

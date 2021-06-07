@@ -25,15 +25,15 @@ class UserController extends Controller
         if (!empty($idGroup->get(0)->id)) {
             $int = (int) $idGroup->get(0)->id;
     
-            $group = DB::table('group_user')
-            ->select('id_group')
-            ->where('id_user','=',$request->user()->id)
-            ->where('id_group','=',$int)->get();          
+            $group = DB::table('group_users')
+            ->select('group_id')
+            ->where('user_id','=',$request->user()->id)
+            ->where('group_id','=',$int)->get();          
                     
-            if (empty($group->get(0)->id_group)) {
-                DB::table('group_user')->insert([
-                    'id_user' => $request->user()->id,
-                    'id_group' => $idGroup->get(0)->id
+            if (empty($group->get(0)->group_id)) {
+                DB::table('group_users')->insert([
+                    'user_id' => $request->user()->id,
+                    'group_id' => $idGroup->get(0)->id
                 ]);
             }else{
                 dd('JÁ ESTA NO TIME');  
