@@ -17,9 +17,14 @@
                     </div>
                   {{--   <form action="{{ route('grupo.salvar') }}" method="post"> --}}
                         {{ csrf_field() }}
+
                         <div class="form-group">
                             <label for="time">Time</label>
-                            <input type="text" name="time" class="form-control" placeholder="Nome do grupo"/>
+                            <select class="form-control form-control-lg" name="time" id="time">
+                                @foreach ($groups as $group)                                    
+                                    <option value="{{$group->id}}">{{$group->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button class="btn btn-info">Adicionar</button>
@@ -30,4 +35,7 @@
             </div>
         </div>
     </div>
+
+    <script src="{{ asset('js/scrim/add_scrim.js') }}" defer></script>
+    
 @endsection

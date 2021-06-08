@@ -6,6 +6,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    
 
     <!-- <title>{{ config('app.name', 'Laravel') }}</title> -->
     <title>App Cliente</title>
@@ -13,6 +14,14 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{-- <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -35,9 +44,18 @@
             </div>
         @endif
 
-        <main class="py-4">
-            @yield('content')
-        </main>
     </div>
+    
+    <main class="py-4">
+        @yield('content')
+    </main>
+
+
+    {{-- <script src="{{ asset('../bower_components/Ajax/src/Ajax.js') }}" ></script> --}}
+    <script>
+        APP_URL = '{{url('/')}}' ;
+    </script>
+
+
 </body>
 </html>

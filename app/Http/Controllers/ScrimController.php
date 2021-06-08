@@ -7,9 +7,32 @@ use Illuminate\Support\Facades\Config;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Scrim;
 
 class ScrimController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function addScrim($id,Request $request)
+    {
+        $scrim = Scrim::find($id);
+
+        $user = $request->user();
+
+        $groups = $user->groups()->where('user_id', '=', $user->id)->get();
+
+        return view('scrim.add_scrim',compact('scrim','groups'));
+    }
+
+    public function loadTime()
+    {
+
+        return "testeeee";
+    }
+
     /**
      * Display a listing of the resource.
      *

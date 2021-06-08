@@ -1,0 +1,31 @@
+{
+	"name": "ajax-abstraction",
+	"version": "2.0.3",
+	"description": "A tiny XMLHTTPRequest abstraction.",
+	"main": "dist/Ajax.min.js",
+	"author": "Renie Siqueira <renie.webdev@gmail.com>",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/renie/Ajax.git"
+	},
+	"keywords": [
+		"ajax",
+		"request",
+		"javascript",
+		"get",
+		"post"
+	],
+	"bugs": {
+		"url": "https://github.com/renie/Ajax/issues"
+	},
+	"dependencies": {
+		"uglify-js": "^2.7.5"
+	},
+	"scripts": {
+		"postinstall": "npm run build",
+		"build": "node scripts/build.js",
+		"minify": "node scripts/uglifier.js"
+	},
+	"license": "GPL-3.0",
+	"homepage": "https://github.com/renie/Ajax#readme"
+}

@@ -69,6 +69,4 @@
         </div>
     </div>
 
-    <script src="{{ asset('js/time/app.js') }}" defer></script>
-
 @endsection

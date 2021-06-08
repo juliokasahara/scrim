@@ -105,16 +105,5 @@ class GroupController extends Controller
         return redirect()->action([GroupController::class, 'index']);
     }
 
-    
-    public function addScrim($id,Request $request)
-    {
-        $scrim = Scrim::find($id);
-
-        $user = $request->user();
-
-        $groups = $user->groups()->where('user_id', '=', $user->id)->get();
-
-        return view('group.add_scrim',compact('scrim','groups'));
-    }
 
 }
