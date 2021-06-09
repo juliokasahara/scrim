@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Group;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 
@@ -27,10 +28,23 @@ class ScrimController extends Controller
         return view('scrim.add_scrim',compact('scrim','groups'));
     }
 
-    public function loadTime()
+    public function loadTime($idGroup,$idScrim)
     {
 
-        return "testeeee";
+        $users = DB::table('users')
+        ->select('users.id','users.name')
+        ->join('group_users', 'users.id', '=', 'group_users.user_id')
+        ->join('groups', 'groups.id', '=', 'group_users.group_id')
+        ->where('group_users.group_id','=',$idGroup)
+        ->get();
+
+        $scrim = Scrim::find($idScrim);
+
+        // return view('scrim.select_player',compact('users','scrim'));
+
+        $returnHTML = view('scrim.select_player')->with('scrim', $scrim)->with('users', $users)->render();
+        return response()->json(array('success' => true, 'html'=>$returnHTML));
+
     }
 
     /**

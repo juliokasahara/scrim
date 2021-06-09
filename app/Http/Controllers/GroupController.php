@@ -29,6 +29,7 @@ class GroupController extends Controller
         $groups = $user->groups()->where('user_id', '=', $user->id)->paginate(Config::get('constantes.paginacao.padrao'));
 
         return view('group.index',compact('groups','user'));
+        // return compact('groups','user'); //retorna JSON
 
     }
 

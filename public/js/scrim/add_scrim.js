@@ -4,27 +4,32 @@ $(document).ready(function() {
         loadPlayer($(this).val());      
     });
 
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+    // $.ajaxSetup({
+    //     headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="token"]').attr('content')
+    //     }
+    // });
 
 });
 
 function loadPlayer(idGroup){
 
+    var idScrim = $("[name='idScrim']").val();
+
     $.ajax({
         
-        url:APP_URL + '/scrim/time',
+        url:APP_URL + '/scrim/time/' + idGroup + '/' + idScrim,
         type:"get",
-/*         data: {
-            "_token": "{{ csrf_token() }}",
-            "idGroup": idGroup
-            }, */
-        // dataType: 'json',
-        success: function(reponse){
-            console.log(reponse);
+        dataType: 'json',
+        success: function(data){
+            // $(".result_player").text( data );
+
+            if(data.success == true) {
+              //user_jobs div defined on page
+              $('#result_player').html(data.html);
+            } else {
+            //   $('#result_player').html(data.html + '{{ $user->username }}');
+            }
         }
     });
 

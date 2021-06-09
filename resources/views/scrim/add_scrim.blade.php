@@ -6,10 +6,7 @@
         <div class="col-md-12">
             <div class="card">
                 <nav aria-label="breadcrumb">
-{{--                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="{{ route('grupo') }}">Grupo</a></li>
-                        <li class="breadcrumb-item active">Adicionar</li>
-                    </ol> --}}
+                    <input type="hidden" name="idScrim" value="{{ $scrim->id }}"/>
                 </nav>
                 <div class="card-body">
                     <div class="form-group">
@@ -27,6 +24,8 @@
                             </select>
                         </div>
 
+                        <div id="result_player"></div>
+                                           
                         <button class="btn btn-info">Adicionar</button>
 
                     {{-- </form> --}}

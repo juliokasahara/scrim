@@ -50,10 +50,15 @@
 
                             <form action="{{ route('usuario.convite') }}" method="POST" action="/register">
                                 @csrf
-                                <input type="text" name="hash" class="form" placeholder="Adicionar grupo">
-                                <button class="btn btn-success">+ Grupo</button>
+                                <div class="input-group">
+                                    <input type="text" name="hash" class="form-control bg-light border-0 small" placeholder="Adicionar grupo" aria-describedby="basic-addon2">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-success" type="submit">
+                                            <span class="fas fa-search fa-sm">+ Grupo</span>
+                                        </button>
+                                    </div>
+                                </div>
                             </form>
-
                             
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
