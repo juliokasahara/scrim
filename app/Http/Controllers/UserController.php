@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class UserController extends Controller
 {
@@ -36,10 +37,12 @@ class UserController extends Controller
                     'group_id' => $idGroup->get(0)->id
                 ]);
             }else{
-                dd('JÁ ESTA NO TIME');  
+                Session::flash('custom-error', 'Você já está cadastrado no grupo!');  
+                return redirect()->action([GroupController::class, 'index']);
             }
         }else{
-            dd('não existe');
+            Session::flash('custom-error', 'Convite inválido!'); 
+            return redirect()->action([GroupController::class, 'index']);
         }
         
         return redirect()->action([GroupController::class, 'index']);

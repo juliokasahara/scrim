@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#time").change(function(){
+    $("#grupo").change(function(){
         loadPlayer($(this).val());      
     });
 

@@ -12,7 +12,7 @@
                     </ol>
                 </nav>
 
-                <div class="card-body">
+                <div class="card-body table-responsive">
 
                     <p>
                         <a class="btn btn-primary" href="{{ route('group.add') }}">Adicionar</a>

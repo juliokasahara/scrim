@@ -35,6 +35,15 @@
                 </div>
             </div>
         @endif
+        @if (Session::has('custom-error'))
+            <br>
+            <div class="col-md-12 col-md-offset-1">
+                <div class="alert alert-danger" role="alert">
+                    {{ session('custom-error') }}
+                </div>
+            </div>
+        @endif
+
 
     </div>
     

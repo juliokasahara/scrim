@@ -6,19 +6,19 @@
         <div class="col-md-12">
             <div class="card">
                 <nav aria-label="breadcrumb">
-                    <input type="hidden" name="idScrim" value="{{ $scrim->id }}"/>
                 </nav>
                 <div class="card-body">
                     <div class="form-group">
                         <h1>{{ $scrim->nome }}</h1>
                     </div>
-                  {{--   <form action="{{ route('grupo.salvar') }}" method="post"> --}}
-                        {{ csrf_field() }}
-
+                    <form action="{{ route('scrim.salvar') }}" method="post">
+                        {{ csrf_field() }}                      
+                        <input type="hidden" name="idScrim" value="{{ $scrim->id }}"/>
                         <div class="form-group">
-                            <label for="time">Time</label>
-                            <select class="form-control form-control-lg" name="time" id="time">
-                                @foreach ($groups as $group)                                    
+                            <label for="time">Grupo</label>
+                            <select class="form-control form-control-lg" name="grupo" id="grupo" required>
+                                <option></option>
+                                @foreach ($groups as $group)                                 
                                     <option value="{{$group->id}}">{{$group->name}}</option>
                                 @endforeach
                             </select>
@@ -28,7 +28,7 @@
                                            
                         <button class="btn btn-info">Adicionar</button>
 
-                    {{-- </form> --}}
+                    </form>
 
                 </div>
             </div>

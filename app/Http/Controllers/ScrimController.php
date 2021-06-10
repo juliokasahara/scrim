@@ -2,19 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Group;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Config;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Scrim;
+use Carbon\Carbon;
+use DateTime;
+use DateTimeZone;
+use Illuminate\Support\Facades\Session;
+
 
 class ScrimController extends Controller
 {
     public function __construct()
     {
         $this->middleware('auth');
+        
     }
 
     public function addScrim($id,Request $request)
@@ -26,6 +30,30 @@ class ScrimController extends Controller
         $groups = $user->groups()->where('user_id', '=', $user->id)->get();
 
         return view('scrim.add_scrim',compact('scrim','groups'));
+    }
+
+    
+    public function detalhe($idScrim,Request $request)
+    {
+
+        $users = DB::table('users')
+        ->select('users.id as id_user','users.name as nick','groups.*')
+        ->join('group_scrims', 'users.id', '=', 'group_scrims.user_id')
+        ->join('groups', 'groups.id', '=', 'group_scrims.group_id')
+        ->where('group_scrims.scrim_id','=',$idScrim)->orderBy('group_scrims.created_at')
+        ->get();
+
+        $time = array();
+        foreach ($users as $user) {
+            $time[] =array( 'name' => $user->name, 'user' => $user);
+        }
+
+        $collection = collect($time);
+        $times = $collection->mapToGroups(function ($item, $key) {
+            return [$item['name'] => $item['user']];
+        });
+              
+        return view('scrim.list_scrim',compact('times'));
     }
 
     public function loadTime($idGroup,$idScrim)
@@ -40,11 +68,52 @@ class ScrimController extends Controller
 
         $scrim = Scrim::find($idScrim);
 
-        // return view('scrim.select_player',compact('users','scrim'));
-
         $returnHTML = view('scrim.select_player')->with('scrim', $scrim)->with('users', $users)->render();
         return response()->json(array('success' => true, 'html'=>$returnHTML));
+    }
 
+    public function save(Request $request)
+    {
+        $count = sizeOf($request->player);
+        $date = Carbon::now()->format('Y-m-d h:i:s');
+
+        
+        // dd($date);
+
+        for ($i=1; $i <= $count; $i++) { 
+
+            $existe = DB::table('group_scrims')->where([
+                'scrim_id' => $request->idScrim,
+                'user_id'  => $request->player[$i],
+            ])->get(); 
+            
+            if($existe->get(0) == null){
+
+                DB::table('group_scrims')->insert([
+                    'scrim_id' => $request->idScrim,
+                    'group_id' => $request->grupo,
+                    'user_id'  => $request->player[$i],
+                    'created_at' => $date,
+                    'posicao'  => $i
+                ]);  
+            
+            }else{
+                //retornar a pessoa e o time que pertence
+                // $user = DB::table('groups')
+                //     ->join('group_scrims', 'group_scrims.group_id', '=', 'groups.id') 
+                //     ->where('group_scrims.users.id','=',$request->player[$i]);             
+                //     dd($user);
+                // Session::flash('status', 'O' . $user->name . ' Está cadastrado com o squad' . $user->groups()->group_id); 
+                Session::flash('custom-error', 'O ' . $request->player[$i] . ' Está cadastrado com o squad'); 
+
+                return redirect()->action([ScrimController::class, 'index']);
+            }
+        }     
+
+        Session::flash('status', 'Grupo deletado com sucesso!'); 
+
+        return redirect()->action([ScrimController::class, 'index']);
+        
     }
 
     /**

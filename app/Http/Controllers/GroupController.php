@@ -60,16 +60,15 @@ class GroupController extends Controller
 
         $user = $request->user();
 
-        $idGroup = DB::table('users')
-        ->select('groups.id')
-        ->join('groups', 'users.id', '=', 'groups.user_owner_id')
-        ->where('users.id','=',$user->id)
-        ->where('groups.id','=',$id)
-        ->get();
+        // $idGroupPropExiste = DB::table('users')
+        // ->select('groups.id')
+        // ->join('groups', 'users.id', '=', 'groups.user_owner_id')
+        // ->where('users.id','=',$user->id)
+        // ->where('groups.id','=',$id)
+        // ->get();
 
-
-        if($idGroup->get(0) == false ){
-            Session::flash('status', 'Não existeee!!!!!!!!!eee esse grupo'); 
+        if($user->validaPropriedade($user->id,$id)){
+            Session::flash('custom-error', 'Não existe esse grupo.'); 
 
             return redirect()->action([GroupController::class, 'index']);
         }
@@ -77,7 +76,7 @@ class GroupController extends Controller
         $group = \App\Models\Group::find($id);
 
         if(!$group){
-            Session::flash('status', 'Não existe esse grupo'); 
+            Session::flash('custom-error', 'Não existe esse grupo.'); 
 
             return redirect()->view('group.add'); 
         }
@@ -87,21 +86,29 @@ class GroupController extends Controller
 
     public function update(Request $request,$id)
     {
-        \App\Models\Group::find($id)->update($request->all());
+        Group::find($id)->update($request->all());
 
         Session::flash('status', 'Atualizado com sucesso!'); 
 
         return redirect()->action([GroupController::class, 'index']);
     }
 
-    public function delete($id)
+    public function delete($id,Request $request)
     {
+        $user = $request->user();
+
+        if($user->validaPropriedade($user->id,$id)){
+            Session::flash('custom-error', 'Não existe esse grupo.'); 
+
+            return redirect()->action([GroupController::class, 'index']);
+        }
+
         DB::table('group_users')->where('group_id', $id)->delete();
 
         $group = \App\Models\Group::find($id);
         $group->delete();
 
-        Session::flash('status', 'Grupo deletado com sucesso!'); 
+        Session::flash('status', 'Inscrição efetuada!'); 
 
         return redirect()->action([GroupController::class, 'index']);
     }

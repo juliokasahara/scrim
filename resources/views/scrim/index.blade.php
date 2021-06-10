@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-
-
 @section('content')
     <div class="justify-content-center">
         <div class="col-md-12">
@@ -12,7 +10,7 @@
                     </ol>
                 </nav>
 
-                <div class="card-body">
+                <div class="card-body table-responsive">
 
                     <table class="table table-striped">
                         <thead>
@@ -67,13 +65,8 @@
                                 
                             </th>
                             <th scope="row">
-                                {{--                                 <div class="btn-group" role="group">
-                                                                    <a type="button" class="btn btn-outline-success" href="{{ route('time',$group->id) }}">Time</a>
-                                                                    @if ($group->user_owner_id == $user->id)                              
-                                                                    <a type="button" class="btn btn-outline-warning" href="{{ route('grupo.editar',$group->id) }}" >Editar</a>
-                                                                        <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
-                                                                    @endif
-                                                                </div> --}}
+                                                               
+                                <a type="button" class="btn btn-outline-success" href="{{ route('scrim.detalhe',$scrim->id) }}">Detalhe</a>
                                 <a type="button" class="btn btn-outline-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
                                 
                             </th>
@@ -82,12 +75,10 @@
                         </tbody>
                     </table>
 
-        
-
-
 {{--                     <div class="center">
                         {!! $groups->links() !!}
                     </div> --}}
+
                 </div>
             </div>
         </div>

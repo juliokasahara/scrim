@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Group extends Model
 {
@@ -23,7 +24,5 @@ class Group extends Model
         // info;app;tabela,idPK;idFK
         return $this->belongsToMany(Scrim::class,'group_scrims','scrim_id','group_id');
     }
-
-
 
 }

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -15,6 +16,18 @@ class User extends Authenticatable
 
     public function listGroups(){
         return $this->all();
+    }
+
+    public function validaPropriedade($idUser,$idGroup)
+    {
+        $idGroupPropExiste = DB::table('users')
+        ->select('groups.id')
+        ->join('groups', 'users.id', '=', 'groups.user_owner_id')
+        ->where('users.id','=',$idUser)
+        ->where('groups.id','=',$idGroup)
+        ->get();
+
+        return $idGroupPropExiste->get(0) == null;
     }
 
     public function groups(){

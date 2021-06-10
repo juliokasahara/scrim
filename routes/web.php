@@ -43,6 +43,8 @@ Route::get('/time/deletar/{id}/{idGrupo}', [TimeController::class,'delete'])->na
 Route::get('/scrim', [ScrimController::class,'index'])->name('scrim');
 Route::get('/scrim/inscrincao/{id}', [ScrimController::class,'addScrim'])->name('scrim.inscricao');
 Route::get('/scrim/time/{idGroup}/{idScrim}', [ScrimController::class,'loadTime'])->name('scrim.time');
+Route::post('/scrim/time/salvar', [ScrimController::class,'save'])->name('scrim.salvar');
+Route::get('/scrim/detalhe/{idScrim}', [ScrimController::class,'detalhe'])->name('scrim.detalhe');
 
 
 
