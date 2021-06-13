@@ -20,11 +20,6 @@
                             <input type="text" name="name" class="form-control" placeholder="Nome do grupo" value="{{ $group->name }}"/>
                         </div>
 
-                        <div class="form-group">
-                            <label for="sigla">Sigla</label>
-                            <input type="text" name="sigla" class="form-control" placeholder="Sigla do grupo" value="{{ $group->sigla }}"/>
-                        </div>
-
                         <button class="btn btn-info">Adicionar</button>
 
                     </form>

@@ -6,19 +6,12 @@
             <div class="card">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
-                        <li class="breadcrumb-item active">Lista de inscritos</li>
+                        <li class="breadcrumb-item active">Lista de Scrim</li>
                     </ol>
                 </nav>
 
-                
                 <div class="card-body">
-                    <div class="form-group">
-                    @if ($usuarioCadastrado->contains('scrim_id',$scrim->id))
-                        <a type="button" class="btn btn-danger" href="{{ route('scrim.cancelar',[$usuarioCadastrado->get(0)->group_id,$scrim->id]) }}">Cancelar inscrição</a>
-                    @else
-                        <a type="button" class="btn btn-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
-                    @endif
-                    </div>
+
                     <div class="accordion" id="accordionExample">
                         <div class="card">
                             @foreach ($times as $key => $users)
@@ -28,7 +21,7 @@
                                     <h2 class="mb-0">
                                     <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse-{{ $loop->index }}" aria-expanded="true" aria-controls="collapse-{{ $loop->index }}">
                                         <div class="text-xs font-weight-bold text-primary mb-1 h5 mb-0 font-weight-bold text-gray-800">
-                                            {{ $loop->index + 1 }} - {{ $key }} &nbsp;&nbsp;<span class="badge right badge-primary badge-pill">Player - {{sizeOf($users)}}</span>
+                                            {{ $loop->index + 1 }} - {{ $key }}&nbsp;&nbsp;<span class="badge right badge-primary badge-pill">Player - {{sizeOf($users)}}</span>
                                         </div>
                                     </button>
                                     </h2>
@@ -75,12 +68,24 @@
                                             
                                             @endforeach 
                                             
-                                        </div>                                                                       
+                                        </div>
+                                            
+                                                {{-- <div class="p-2 bd-highlight">
+                                                    {{ $user->nick }}
+                                                </div> --}}
+                                             
+                                                                       
                                     </div>
                                 </div>
                             @endforeach
                         </div>
                     </div>
+
+
+{{--                     <div class="center">
+                        {!! $groups->links() !!}
+                    </div> --}}
+
                 </div>
             </div>
         </div>

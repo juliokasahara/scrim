@@ -26,10 +26,7 @@
                                 Grupo(s)
                             </th>
                             <th scope="col">
-                                Sigla
-                            </th>
-                            <th scope="col">
-                                Convite
+                                convite
                             </th>
                             <th scope="col">
                                 
@@ -43,19 +40,16 @@
                                 {{ $group->name }}
                             </th>
                             <th scope="row">
-                                {{ $group->sigla }}
-                            </th>
-                            <th scope="row">
                                 @if ($group->user_owner_id == $user->id) 
                                     {{ $group->hash }} 
                                 @endif
                             </th>
                             <th scope="row">
-                                <div class="btn">
-                                    <a type="button" class="btn btn-info" href="{{ route('time',$group->id) }}">Time</a>
+                                <div class="btn-group" role="group">
+                                    <a type="button" class="btn btn-outline-success" href="{{ route('time',$group->id) }}">Time</a>
                                     @if ($group->user_owner_id == $user->id)                              
-                                    <a type="button" class="btn btn-secondary" href="{{ route('grupo.editar',$group->id) }}" >Editar</a>
-                                        <a type="button" class="btn btn-danger" onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
+                                    <a type="button" class="btn btn-outline-warning" href="{{ route('grupo.editar',$group->id) }}" >Editar</a>
+                                        <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Deletar esse registro?') ? window.location.href='{{ route('grupo.deletar',$group->id) }}' : false)">Excluir</a>
                                     @endif
                                 </div>
                             </th>
