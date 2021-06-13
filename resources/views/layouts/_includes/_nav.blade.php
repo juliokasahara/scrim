@@ -52,7 +52,7 @@
                             <form action="{{ route('usuario.convite') }}" method="POST" action="/register">
                                 @csrf
                                 <div class="input-group">
-                                    <input type="text" name="hash" class="form-control bg-light border-0 small" placeholder="Adicionar grupo" aria-describedby="basic-addon2">
+                                    <input type="text" name="hash" class="form-control bg-light border-0 small" placeholder="Convite do grupo" aria-describedby="basic-addon2">
                                     <div class="input-group-append">
                                         <button class="btn btn-success" type="submit">
                                             <span class="fas fa-search fa-sm">+ Grupo</span>

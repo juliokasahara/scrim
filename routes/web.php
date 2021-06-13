@@ -34,7 +34,7 @@ Route::get('/grupo', [GroupController::class,'index'])->name('grupo');
 Route::get('/grupo/adicionar', [GroupController::class,'add'])->name('group.add');
 Route::post('/grupo/salvar', [GroupController::class,'save'])->name('grupo.salvar');
 Route::get('/grupo/editar/{id}', [GroupController::class,'edit'])->name('grupo.editar');
-Route::put('/grupo/atualizar/{id}', [GroupController::class,'update'])->name('grupo.atualizar');
+Route::post('/grupo/atualizar/{id}', [GroupController::class,'update'])->name('grupo.atualizar');
 Route::get('/grupo/deletar/{id}', [GroupController::class,'delete'])->name('grupo.deletar');
 
 Route::get('/time/{id}', [TimeController::class,'index'])->name('time');
@@ -45,6 +45,7 @@ Route::get('/scrim/inscrincao/{id}', [ScrimController::class,'addScrim'])->name(
 Route::get('/scrim/time/{idGroup}/{idScrim}', [ScrimController::class,'loadTime'])->name('scrim.time');
 Route::post('/scrim/time/salvar', [ScrimController::class,'save'])->name('scrim.salvar');
 Route::get('/scrim/detalhe/{idScrim}', [ScrimController::class,'detalhe'])->name('scrim.detalhe');
+Route::get('/scrim/cancelar/{idGroup}/{idScrim}', [ScrimController::class,'cancelar'])->name('scrim.cancelar');
 
 
 

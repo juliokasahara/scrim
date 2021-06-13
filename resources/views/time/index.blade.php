@@ -14,8 +14,6 @@
 
                 <div class="card-body">
 
-
-
                     <table class="table table-striped">
                         <thead>
                           <tr>
@@ -39,7 +37,7 @@
 
                             <th scope="row">
                                 @if($user->user_id != $user->user_owner_id)  
-                                    <a type="button" class="btn btn-outline-danger" onclick="return (confirm('Usuário esse registro?') ? window.location.href='{{ route('time.deletar',[$user->user_id,$user->group_id]) }}' : false)">Excluir</a>
+                                    <a type="button" class="btn btn-danger" onclick="return (confirm('Usuário esse registro?') ? window.location.href='{{ route('time.deletar',[$user->user_id,$user->group_id]) }}' : false)">Excluir</a>
                                 @endif
                             </th>
                           </tr>

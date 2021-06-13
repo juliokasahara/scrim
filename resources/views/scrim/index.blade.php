@@ -34,7 +34,7 @@
                                 Qnt. Player
                             </th>
                             <th scope="col">
-                                Vagas
+                                Qnt. Inscritos
                             </th>
                             <th scope="col">
                             </th>
@@ -47,7 +47,7 @@
                                 {{ $scrim->nome }}
                             </th>
                             <th scope="row">
-                                {{ date('d-m-Y', strtotime($scrim->dt_inicio)) }}
+                                {{ date('d/m/Y', strtotime($scrim->dt_inicio)) }}
                             </th>
                             <th scope="row">
                                 {{ $scrim->hora }}
@@ -62,12 +62,16 @@
                                 {{ $scrim->qt_player }}
                             </th>
                             <th scope="row">
-                                
                             </th>
                             <th scope="row">
                                                                
-                                <a type="button" class="btn btn-outline-success" href="{{ route('scrim.detalhe',$scrim->id) }}">Detalhe</a>
-                                <a type="button" class="btn btn-outline-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
+                                <a type="button" class="btn btn-info" href="{{ route('scrim.detalhe',$scrim->id) }}">Detalhe</a>
+
+                                @if ($usuarioCadastrado->contains('scrim_id',$scrim->id))
+                                    {{-- <a type="button" class="btn btn-danger" href="{{ route('scrim.cancelar',$scrim->id) }}">Cancelar inscriçãos</a> --}}
+                                @else
+                                    <a type="button" class="btn btn-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
+                                @endif
                                 
                             </th>
                           </tr>

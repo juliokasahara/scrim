@@ -7,9 +7,11 @@ use Illuminate\Support\Facades\Config;
 
 use Illuminate\Http\Request;
 use App\Models\Scrim;
+use App\Models\User;
 use Carbon\Carbon;
 use DateTime;
 use DateTimeZone;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 
@@ -19,6 +21,17 @@ class ScrimController extends Controller
     {
         $this->middleware('auth');
         
+    }
+
+    public function cancelar($idGroup,$idScrim)
+    {
+        DB::table('group_scrims')
+        ->where('scrim_id', $idScrim)
+        ->where('group_id', $idGroup) 
+        ->delete();
+
+        return redirect()->action([ScrimController::class, 'detalhe'],$idScrim);
+
     }
 
     public function addScrim($id,Request $request)
@@ -37,23 +50,36 @@ class ScrimController extends Controller
     {
 
         $users = DB::table('users')
-        ->select('users.id as id_user','users.name as nick','groups.*')
+        ->select('scrims.qt_time as qt_time','groups.sigla as sigla','users.id as id_user','users.name as nick','groups.*')
         ->join('group_scrims', 'users.id', '=', 'group_scrims.user_id')
         ->join('groups', 'groups.id', '=', 'group_scrims.group_id')
+        ->join('scrims', 'scrims.id', '=', 'group_scrims.scrim_id')
         ->where('group_scrims.scrim_id','=',$idScrim)->orderBy('group_scrims.created_at')
         ->get();
 
         $time = array();
         foreach ($users as $user) {
-            $time[] =array( 'name' => $user->name, 'user' => $user);
+            $time[] =array( 'name' => $user->name .' ('.$user->sigla.')' , 'user' => $user);
         }
 
         $collection = collect($time);
         $times = $collection->mapToGroups(function ($item, $key) {
             return [$item['name'] => $item['user']];
         });
-              
-        return view('scrim.list_scrim',compact('times'));
+
+        $timeReservas = null;
+        if ($users->get(0) != null) {
+            $timeReservas = $users->get(0)->qt_time;
+        }
+        
+        $scrim = Scrim::find($idScrim);
+
+        $usuarioCadastrado = DB::table('group_scrims')
+        ->select('scrim_id','group_id')
+        ->where('user_id','=',Auth::user()->id)
+        ->get();
+
+        return view('scrim.list_scrim',compact('times','timeReservas','scrim','usuarioCadastrado'));
     }
 
     public function loadTime($idGroup,$idScrim)
@@ -77,9 +103,6 @@ class ScrimController extends Controller
         $count = sizeOf($request->player);
         $date = Carbon::now()->format('Y-m-d h:i:s');
 
-        
-        // dd($date);
-
         for ($i=1; $i <= $count; $i++) { 
 
             $existe = DB::table('group_scrims')->where([
@@ -94,7 +117,8 @@ class ScrimController extends Controller
                     'group_id' => $request->grupo,
                     'user_id'  => $request->player[$i],
                     'created_at' => $date,
-                    'posicao'  => $i
+                    'posicao'  => $i,
+                    'user_id_create' => Auth::user()->id
                 ]);  
             
             }else{
@@ -110,9 +134,9 @@ class ScrimController extends Controller
             }
         }     
 
-        Session::flash('status', 'Grupo deletado com sucesso!'); 
+        Session::flash('status', 'Grupo cadastrado com sucesso!'); 
 
-        return redirect()->action([ScrimController::class, 'index']);
+        return redirect()->action([ScrimController::class, 'detalhe'],$request->idScrim);
         
     }
 
@@ -124,9 +148,16 @@ class ScrimController extends Controller
     public function index(Request $request)
     {
 
-        $scrims = DB::table('scrims')->paginate(Config::get('constantes.paginacao.padrao'));
+        $scrims = DB::table('scrims')
+        ->orderBy('dt_inicio')
+        ->paginate(Config::get('constantes.paginacao.padrao'));
 
-        return view('scrim.index',compact('scrims'));
+        $usuarioCadastrado = DB::table('group_scrims')
+        ->select('scrim_id','user_id','user_id_create')
+        ->where('user_id','=',Auth::user()->id)
+        ->get();
+
+        return view('scrim.index',compact('scrims','usuarioCadastrado'));
 
     }
 

@@ -42,6 +42,7 @@ class GroupController extends Controller
 
         $input = $request->all();
         $input['user_owner_id'] = $request->user()->id;
+        $input['sigla'] = strtoupper($request->sigla);
         $input['hash'] = md5($request->user()->id.$request->name);
 
         $group = \App\Models\Group::create($input);
