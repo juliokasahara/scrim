@@ -14,10 +14,14 @@
                 <div class="card-body">
 
                     <form action="{{ route('grupo.salvar') }}" method="post">
-                        {{ csrf_field() }}
+                        {{ csrf_field() }} 
                         <div class="form-group">
                             <label for="name">Nome</label>
                             <input type="text" name="name" class="form-control" placeholder="Nome do grupo"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="sigla">Nome</label>
+                            <input type="text" name="sigla" class="form-control" placeholder="Sigla do grupo"/>
                         </div>
 
                         <button class="btn btn-info">Adicionar</button>

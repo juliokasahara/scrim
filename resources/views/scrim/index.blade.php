@@ -66,8 +66,15 @@
                             </th>
                             <th scope="row">
                                                                
-                                <a type="button" class="btn btn-outline-success" href="{{ route('scrim.detalhe',$scrim->id) }}">Detalhe</a>
-                                <a type="button" class="btn btn-outline-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
+                                <a type="button" class="btn btn-info" href="{{ route('scrim.detalhe',$scrim->id) }}">Detalhe</a>
+
+                                @if (!$usuarioCadastrado->contains('scrim_id', $scrim->id))
+                                    <a type="button" class="btn btn-success" href="{{ route('scrim.inscricao',$scrim->id) }}">Cadastrar</a>
+                                @else
+                                    {{-- <a type="button" class="btn btn-danger" href="{{ route('scrim.cancelar',[$usuarioCadastrado->get(0)->group_id,$scrim->id]) }}">Cancelar inscrição</a> --}}
+                                @endif
+
+                    
                                 
                             </th>
                           </tr>
