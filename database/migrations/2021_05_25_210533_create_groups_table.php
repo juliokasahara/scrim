@@ -17,6 +17,7 @@ class CreateGroupsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_owner_id');
             $table->string('name')->unique();
+            $table->string('sigla')->unique();
             $table->string('hash');
             $table->timestamps();
 

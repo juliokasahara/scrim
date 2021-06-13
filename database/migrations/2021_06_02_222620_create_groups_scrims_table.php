@@ -19,6 +19,8 @@ class CreateGroupsScrimsTable extends Migration
             $table->foreign('scrim_id')->references('id')->on('scrims');
             $table->unsignedBigInteger('group_id')->unsigned();
             $table->foreign('group_id')->references('id')->on('groups');
+            $table->integer('user_id_create');
+            $table->integer('user_id');        
             $table->integer('posicao');
             $table->timestamps();
         });
